@@ -1,0 +1,39 @@
+{
+    "name": "rayhughes/sendgrid-validation",
+    "description": "A PHP library to validate email addresses using the Twilio SendGrid Email Validation API.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ray Hughes"
+        }
+    ],
+    "keywords": [
+        "sendgrid",
+        "twilio sendGrid",
+        "sendGrid email validation",
+        "validation api",
+        "email validation"
+    ],
+    "require": {
+        "php": "^7.4",
+        "ext-json": "*",
+        "ext-curl": "*",
+        "ext-mbstring": "*",
+        "guzzlehttp/guzzle": "^7.3"
+    },
+    "require-dev": {
+        "vimeo/psalm": "^4.10",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "SendGridValidation\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SendGridValidation\\Tests\\": "tests"
+        }
+    }
+}
