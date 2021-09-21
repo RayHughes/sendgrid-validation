@@ -15,13 +15,12 @@ class EmailValidationMapper
         bool $allowDisposable,
         ?string $suggestion = null
     ): EmailValidationDto {
-        $isValid = !(!$allowDisposable && $isDisposable)
+        $emailValidationDto = new EmailValidationDto();
+
+        $emailValidationDto->isValid = !(!$allowDisposable && $isDisposable)
             && $isValidRisk
             && $isValidScore;
 
-        $emailValidationDto = new EmailValidationDto();
-
-        $emailValidationDto->isValid = $isValid;
         $emailValidationDto->isValidRisk = $isValidRisk;
         $emailValidationDto->isValidScore = $isValidScore;
         $emailValidationDto->isDisposable = $isDisposable;
