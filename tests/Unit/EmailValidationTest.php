@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace SendGridValidation\Tests\Unit\Repository;
+namespace SendGridValidation\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use SendGridValidation\Dto\EmailValidationDto;
 use SendGridValidation\EmailValidation;
 use SendGridValidation\Repository\SendGridApiRepository;
 
-class EmailValidationMapperTest extends TestCase
+class EmailValidationTest extends TestCase
 {
     private const RISKY = 'Risky';
 

@@ -6,17 +6,17 @@ namespace SendGridValidation;
 
 use SendGridValidation\Dto\EmailValidationDto;
 use SendGridValidation\Mapper\EmailValidationMapper;
-use SendGridValidation\Service\SendGridService;
+use SendGridValidation\Repository\SendGridApiRepository;
 
 class EmailValidation
 {
-    public const MIN_SCORE = 0.30;
+    public const MIN_SCORE = 0.15;
 
     private const RISKY = 'Risky';
 
     private const INVALID = 'Invalid';
 
-    private SendGridService $sendGridService;
+    private SendGridApiRepository $sendGridService;
 
     private bool $allowRisky;
 
@@ -27,11 +27,11 @@ class EmailValidation
     private float $minScore;
 
     public function __construct(
-        SendGridService $sendGridService,
-        bool $allowRisky = true,
-        bool $allowDisposable = true,
-        bool $checkValidScore = false,
-        float $minScore = self::MIN_SCORE
+        SendGridApiRepository $sendGridService,
+        bool                  $allowRisky = true,
+        bool                  $allowDisposable = true,
+        bool                  $checkValidScore = false,
+        float                 $minScore = self::MIN_SCORE
     ) {
         $this->sendGridService = $sendGridService;
         $this->allowRisky = $allowRisky;
