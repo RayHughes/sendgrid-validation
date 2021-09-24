@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SendGridValidation\Tests\Unit\Service;
+namespace SendGridValidation\Tests\Unit\Repository;
 
 use Exception;
 use GuzzleHttp\Client;
@@ -11,9 +11,9 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use SendGridValidation\Exception\CannotValidateEmailException;
-use SendGridValidation\Service\SendGridService;
+use SendGridValidation\Repository\SendGridApiRepository;
 
-class SendGridServiceTest extends TestCase
+class SendGridRepositoryTest extends TestCase
 {
     private const API_KEY = 'key';
 
@@ -35,7 +35,7 @@ class SendGridServiceTest extends TestCase
         $this->apiClient->expects($this->once())
             ->method('post')
             ->with(
-                $this->equalTo(SendGridService::SENDGRID_VALIDATION_URI),
+                $this->equalTo(SendGridApiRepository::SENDGRID_VALIDATION_URI),
                 $this->equalTo([
                     RequestOptions::HEADERS => ['Authorization' => 'Bearer ' . self::API_KEY],
                     RequestOptions::JSON => ['email' => self::EMAIL],
@@ -48,7 +48,7 @@ class SendGridServiceTest extends TestCase
         $this->streamInterface->expects($this->never())
             ->method('getContents');
 
-        $service = $this->createService();
+        $service = $this->createRepository();
 
         $service->handleValidation(self::EMAIL);
     }
@@ -61,7 +61,7 @@ class SendGridServiceTest extends TestCase
         $this->apiClient->expects($this->once())
             ->method('post')
             ->with(
-                $this->equalTo(SendGridService::SENDGRID_VALIDATION_URI),
+                $this->equalTo(SendGridApiRepository::SENDGRID_VALIDATION_URI),
                 $this->equalTo([
                     RequestOptions::HEADERS => ['Authorization' => 'Bearer ' . self::API_KEY],
                     RequestOptions::JSON => ['email' => self::EMAIL],
@@ -76,7 +76,7 @@ class SendGridServiceTest extends TestCase
             ->method('getContents')
             ->willReturn(json_encode([]));
 
-        $service = $this->createService();
+        $service = $this->createRepository();
 
         $this->assertIsArray($service->handleValidation(self::EMAIL));
     }
@@ -90,8 +90,8 @@ class SendGridServiceTest extends TestCase
         $this->streamInterface = $this->createMock(StreamInterface::class);
     }
 
-    private function createService(): SendGridService
+    private function createRepository(): SendGridApiRepository
     {
-        return new SendGridService(self::API_KEY, $this->apiClient);
+        return new SendGridApiRepository(self::API_KEY, $this->apiClient);
     }
 }

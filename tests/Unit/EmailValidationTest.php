@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace SendGridValidation\Tests\Unit\Service;
+namespace SendGridValidation\Tests\Unit\Repository;
 
 use PHPUnit\Framework\TestCase;
 use SendGridValidation\Dto\EmailValidationDto;
 use SendGridValidation\EmailValidation;
-use SendGridValidation\Service\SendGridService;
+use SendGridValidation\Repository\SendGridApiRepository;
 
 class EmailValidationMapperTest extends TestCase
 {
@@ -19,7 +19,7 @@ class EmailValidationMapperTest extends TestCase
 
     private const EMAIL = 'email@example.com';
 
-    private SendGridService $sendGridService;
+    private SendGridApiRepository $sendGridService;
 
     /**
      * @throws \SendGridValidation\Exception\CannotValidateEmailException
@@ -346,6 +346,6 @@ class EmailValidationMapperTest extends TestCase
 
     protected function setup(): void
     {
-        $this->sendGridService = $this->createMock(SendGridService::class);
+        $this->sendGridService = $this->createMock(SendGridApiRepository::class);
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SendGridValidation\Service;
+namespace SendGridValidation\Repository;
 
 use Exception;
 use GuzzleHttp\Client;
@@ -10,7 +10,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use SendGridValidation\Exception\CannotValidateEmailException;
 
-class SendGridService
+class SendGridApiRepository
 {
     public const SENDGRID_VALIDATION_URI = 'https://api.sendgrid.com/v3/validations/email';
 

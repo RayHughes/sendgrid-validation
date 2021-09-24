@@ -3,7 +3,7 @@
 require '../vendor/autoload.php';
 
 use SendGridValidation\EmailValidation;
-use SendGridValidation\Service\SendGridService;
+use SendGridValidation\Repository\SendGridApiRepository;
 
 $apiKey = 'api-key';
 $email = 'email@example.com';
@@ -11,7 +11,7 @@ $email = 'email@example.com';
 /**
  * Basic Usage
  */
-$validation = new EmailValidation(new SendGridService($apiKey));
+$validation = new EmailValidation(new SendGridApiRepository($apiKey));
 
 print_r($validation->validate($email));
 
@@ -19,7 +19,7 @@ print_r($validation->validate($email));
  * Advanced Usage
  */
 $validation = new EmailValidation(
-    new SendGridService($apiKey), // SendGrid service initialization
+    new SendGridApiRepository($apiKey), // SendGrid service initialization
     true, // Consider risky valid (checks against minScore)
     true, // Consider disposable emails valid
     true, // Checks minScore on valid emails

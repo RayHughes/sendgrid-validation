@@ -20,25 +20,21 @@ composer require rayhughes/sendgrid-validation
 
 ### Basic
 `EmailValidation()` initialized with default thresholds.
+
 ```php
 use SendGridValidation\EmailValidation;
-use SendGridValidation\Service\SendGridService;
+use SendGridValidation\Repository\SendGridApiRepository;
 
-$validation = new EmailValidation(new SendGridService('api-key'));
+$validation = new EmailValidation(new SendGridApiRepository('api-key'));
 
-print_r($validation->validate('email@example.com'));
+$emailValid = $validation->validate('email@example.com'));
 
-/** Outputs
-    SendGridValidation\Dto\EmailValidationDto
-    (
-        [isValid] => true
-        [isValidRisk] => true
-        [isValidScore] => true
-        [isDisposable] => false
-        [hasSuggestion] => false
-        [suggestion] => null
-    )
-**/
+echo $emailValid->isValid; // true
+echo $emailValid->isValidRisk; // true
+echo $emailValid->isValidScore; // true
+echo $emailValid->isDisposable; // false
+echo $emailValid->hasSuggestion; //false
+echo $emailValid->suggestion; // null
 ````
 `EmailValidation()->validate()` returns an instance of `EmailValidationDto()`
 
@@ -78,15 +74,15 @@ class EmailValidationDto
 
 ```php
 use SendGridValidation\EmailValidation;
-use SendGridValidation\Service\SendGridService;
+use SendGridValidation\Repository\SendGridApiRepository;
 
 $validation = new EmailValidation(
-    new SendGridService($apiKey),
+    new SendGridApiRepository($apiKey),
     true, // bool $allowRisky = true,
     true, // bool $allowDisposable = true,
     true, // bool $checkValidScore = false,
     EmailValidation::MIN_SCORE // float $minScore = self::MIN_SCORE (0.30)
 );
 
-$validation->validate($email);
+$emailValid = $validation->validate($email);
 ```
