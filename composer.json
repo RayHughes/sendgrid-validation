@@ -16,11 +16,11 @@
         "email validation"
     ],
     "require": {
-        "php": "^7.4",
+        "php": ">=7.4",
         "ext-json": "*",
         "ext-curl": "*",
         "ext-mbstring": "*",
-        "guzzlehttp/guzzle": "^7.3"
+        "guzzlehttp/guzzle": "7.4.5.0"
     },
     "require-dev": {
         "vimeo/psalm": "^4.10",
